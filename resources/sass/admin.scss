@@ -1,0 +1,1022 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700,900&display=swap');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+@import '~image-picker/source/sass/image-picker.scss';
+
+/* width */
+::-webkit-scrollbar {
+  height: 5px;
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 15px;
+  background: #262C49;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #7367F0;
+  border-radius: 15px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #7367F0;
+}
+
+html, body {
+  scroll-behavior: smooth;
+  height: 100%;
+  background-color: $body;
+}
+
+#loading_page {
+  width: 100%;
+  height: 100%;
+  background-color: $card;
+  position: fixed;
+  z-index: 1;
+  margin-top: 0px;
+  top: 0px;
+
+  #loading-center{
+      width: 100%;
+      height: 100%;
+      position: relative;
+  }
+
+  #loading-center-absolute {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      height: 50px;
+      width: 50px;
+      margin-top: -25px;
+      margin-left: -25px;
+     -ms-transform: rotate(45deg);
+         -webkit-transform: rotate(45deg);
+      transform: rotate(45deg);
+      -webkit-animation: loading-center-absolute 1.5s infinite;
+      animation: loading-center-absolute 1.5s infinite;
+
+  }
+
+  .object{
+      width: 25px;
+      height: 25px;
+      background-color: #FFF;
+      float: left;
+
+  }
+
+  #object_one {
+      -webkit-animation: object_one 1.5s infinite;
+      animation: object_one 1.5s infinite;
+  }
+
+  #object_two {
+      -webkit-animation: object_two 1.5s infinite;
+      animation: object_two 1.5s infinite;
+  }
+
+  #object_three {
+      -webkit-animation: object_three 1.5s infinite;
+      animation: object_three 1.5s infinite;
+  }
+
+  #object_four {
+      -webkit-animation: object_four 1.5s infinite;
+      animation: object_four 1.5s infinite;
+  }
+
+  @-webkit-keyframes loading-center-absolute {
+    100% { -webkit-transform: rotate(-45deg); }
+
+  }
+
+  @keyframes loading-center-absolute {
+    100% {
+      transform:  rotate(-45deg);
+      -webkit-transform:  rotate(-45deg);
+    }
+  }
+
+  @-webkit-keyframes object_one {
+      25% {
+          -webkit-transform: translate(0,-50px) rotate(-180deg);
+      }
+      100% {
+          -webkit-transform: translate(0,0) rotate(-180deg);
+      }
+  }
+
+  @keyframes object_one {
+      25% {
+          transform: translate(0,-50px) rotate(-180deg);
+          -webkit-transform: translate(0,-50px) rotate(-180deg);
+      }
+      100% {
+          transform: translate(0,0) rotate(-180deg);
+          -webkit-transform: translate(0,0) rotate(-180deg);
+      }
+  }
+
+
+  @-webkit-keyframes object_two {
+      25% {
+          -webkit-transform: translate(50px,0) rotate(-180deg);
+      }
+      100% {
+          -webkit-transform: translate(0,0) rotate(-180deg);
+      }
+  }
+
+  @keyframes object_two {
+      25% {
+          transform: translate(50px,0) rotate(-180deg);
+          -webkit-transform: translate(50px,0) rotate(-180deg);
+      }
+      100% {
+          transform: translate(0,0) rotate(-180deg);
+          -webkit-transform: translate(0,0) rotate(-180deg);
+      }
+  }
+
+  @-webkit-keyframes object_three {
+      25% { -webkit-transform: translate(-50px,0) rotate(-180deg); }
+      100% { -webkit-transform: translate(0,0) rotate(-180deg); }
+  }
+
+  @keyframes object_three {
+      25% {
+          transform:  translate(-50px,0) rotate(-180deg);
+          -webkit-transform:  translate(-50px,0) rotate(-180deg);
+      }
+      100% {
+          transform: translate(0,0) rotate(-180deg);
+          -webkit-transform: rtranslate(0,0) rotate(-180deg);
+      }
+  }
+
+
+  @-webkit-keyframes object_four {
+      25% { -webkit-transform: translate(0,50px) rotate(-180deg); }
+      100% { -webkit-transform: translate(0,0) rotate(-180deg); }
+  }
+
+  @keyframes object_four {
+      25% {
+          transform: translate(0,50px) rotate(-180deg);
+          -webkit-transform: translate(0,50px) rotate(-180deg);
+      }
+      100% {
+          transform: translate(0,0) rotate(-180deg);
+          -webkit-transform: translate(0,0) rotate(-180deg);
+      }
+  }
+}
+
+#admin {
+  height: 100%;
+
+  .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: $sidebar;
+      height: 100%;
+      width: 260px;
+      max-width: 260px;
+      box-shadow: $sidebar-shadow;
+      padding: 20px;
+      transition: all 0.3s ease-in-out;
+
+      .sidebar-header {
+          padding-left: 5px;
+          text-decoration: none;
+
+          .header-title {
+              font-size: 36px;
+              color: $sidebar-header;
+              transition: all 0.3s ease-in-out;
+          }
+      }
+
+      .sidebar-link {
+
+          &:hover, &:focus {
+              text-decoration: none;
+
+              .inner-link {
+                  padding-left: 20px;
+              }
+          }
+
+          .inner-link {
+              transition: all 0.3s ease-in-out;
+              padding: 10px 15px;
+              color: $white;
+              margin-bottom: 5px;
+
+              &.active {
+                  background-color: $link-active;
+                  border-radius: 4px;
+                  box-shadow: 0px 0px 10px 1px rgba(255, 255, 255, 0.25);
+              }
+
+              .link-icon {
+                  font-size: 20px;
+                  margin-right: 15px;
+              }
+
+              .link-text {
+                  font-size: 16px;
+              }
+          }
+      }
+  }
+  .main-wrapper {
+      position: relative;
+      background-color: $body;
+      margin-left: 260px;
+      width: calc(100% - 260px);
+      padding: 1.3rem 2.2rem 1rem 2.2rem;
+      transition: all 0.3s ease-in-out;
+
+      .navbar-custom {
+          border-radius: .5rem;
+          margin-bottom: 2.2rem;
+
+          &.bg-custom {
+              background-color: $navbar;
+
+              a {
+                  color: $white;
+              }
+          }
+
+          .current-user {
+              color: $white;
+              margin-top: 10px;
+
+              .user-name {
+                  position: relative;
+                  font-size: 16px;
+                  font-weight: 600;
+
+                  .user-status {
+                      font-size: 14px;
+                      position: absolute;
+                      top: 20px;
+                      right: 0;
+                  }
+              }
+          }
+      }
+        .card-custom {
+            border-radius: 0 0 0.5rem 0.5rem;
+            box-shadow: $card-shadow;
+            transition: all 0.3s ease-in-out;
+
+            .card-header:first-child {
+                border-radius: 0;
+            }
+
+            &.bg-color {
+                background-color: $card;
+                color: $white;
+            }
+
+            &.bg-color-light {
+                background-color: $dropdown;
+                color: $white;
+                border: 1px solid $card;
+            }
+
+            .custom-input {
+                border-radius: 4px;
+                border: none;
+                width: 35%;
+                height: 42px;
+                background-color: $input;
+                color: $white;
+            }
+
+            .custom-table {
+                color: $white;
+
+                th, td {
+                    border: 0;
+                    border-bottom: 1px solid #414561;
+                    vertical-align: middle;
+                }
+
+                .btn-action {
+                    text-decoration: none;
+                    color: $white;
+                }
+
+                .btn-edit {
+
+                    &:hover, &:focus {
+                        color: $blue;
+                    }
+                }
+
+                .btn-del {
+                    background-color: transparent;
+                    border: none;
+
+                    &:hover, &:focus {
+                        color: $red;
+                    }
+                }
+            }
+
+            .profile-upload {
+
+                .profile-overlay {
+                    position: relative;
+                    margin: 0 auto;
+                    width: 150px;
+                    height: 150px;
+                    background-color: $black;
+                    border-radius: 25%;
+                    transition: all 0.3s ease-in-out;
+
+                    &:hover, &:focus {
+                        border-radius: 50%;
+
+                        .profile-pic {
+                            border-radius: 50%;
+                        }
+
+                        .btn-profile-upload {
+                            opacity: 0.5;
+                        }
+                    }
+
+                    .profile-pic {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 25%;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                        border: 3px solid $white;
+                        transition: all 0.3s ease-in-out;
+                    }
+
+                    .btn-profile-upload {
+                        position: absolute;
+                        top: 3px;
+                        right: 3px;
+                        width: 96%;
+                        height: 96%;
+                        border-radius: 50%;
+                        opacity: 0;
+                        transition: all 0.3s ease-in-out;
+                    }
+                }
+            }
+        }
+
+        .custom-modal {
+
+            .profile-upload {
+
+                .profile-overlay {
+                    position: relative;
+                    margin: 0 auto;
+                    width: 150px;
+                    height: 150px;
+                    background-color: $black;
+                    border-radius: 25%;
+                    transition: all 0.3s ease-in-out;
+
+                    &:hover, &:focus {
+                        border-radius: 50%;
+
+                        .profile-pic {
+                            border-radius: 50%;
+                        }
+
+                        .btn-profile-upload {
+                            opacity: 0.5;
+                        }
+                    }
+
+                    .profile-pic {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 25%;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                        border: 3px solid $white;
+                        transition: all 0.3s ease-in-out;
+                    }
+
+                    .btn-profile-upload {
+                        position: absolute;
+                        top: 3px;
+                        right: 3px;
+                        width: 96%;
+                        height: 96%;
+                        border-radius: 50%;
+                        opacity: 0;
+                        transition: all 0.3s ease-in-out;
+                    }
+                }
+            }
+        }
+  }
+
+  .custom-dropdown {
+
+      .dropdown-toggle {
+
+          &::after {
+              display: none;
+          }
+
+          .overlay-profile {
+              width: 40px;
+              height: 40px;
+              background-color: $black;
+              border-radius: 50%;
+          }
+
+          .profile {
+              width: 100%;
+              height: 100%;
+              border-radius: 50%;
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: cover;
+          }
+      }
+
+      .custom-dropdown-menu {
+          padding: 8px 5px;
+          background-color: $dropdown;
+          border-color: $dropdown-border;
+          min-width: 0;
+
+          .dropdown-divider {
+              border-color: $dropdown-border;
+          }
+
+          .dropdown-item {
+              padding: 0.3rem 0.8rem;
+
+              &:hover, &:focus {
+                  background-color: $link-active;
+              }
+          }
+      }
+  }
+
+  .badge-custom {
+      padding: 8px;
+      border-radius: 16px;
+  }
+
+  .btn {
+      border-radius: 0.5rem;
+
+      &:hover, &:focus {
+          box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.5);
+      }
+  }
+
+  .btn-success {
+      background-color: $success;
+      border-color: $success;
+      color: $white;
+  }
+
+  .btn-secondary {
+      background-color: $card;
+      border-color: $card;
+      color: $white;
+  }
+
+  .btn-danger {
+      background-color: $danger;
+      border-color: $danger;
+      color: $white;
+  }
+
+  .btn-primary {
+      background-color: $primary;
+      border-color: $primary;
+      color: $white;
+  }
+
+  .btn-info {
+      background-color: $info;
+      border-color: $info;
+      color: $white;
+  }
+
+  .btn-warning {
+      background-color: $warning;
+      border-color: $warning;
+      color: $white;
+  }
+
+  .btn-outline-primary {
+      background-color: transparent;
+      border-color: $primary;
+      color: $primary;
+
+      &:hover, &:focus {
+          background-color: $primary;
+          color: $white;
+      }
+  }
+
+  .btn-outline-info {
+      background-color: transparent;
+      border-color: $info;
+      color: $info;
+
+      &:hover, &:focus {
+          background-color: $info;
+          color: $white;
+      }
+  }
+
+  .btn-outline-secondary {
+      background-color: transparent;
+      border-color: $card;
+      color: $card;
+
+      &:hover, &:focus {
+          background-color: $card;
+          color: $white;
+      }
+  }
+
+  .btn-outline-success {
+      background-color: transparent;
+      border-color: $success;
+      color: $success;
+
+      &:hover, &:focus {
+          background-color: $success;
+          color: $white;
+      }
+  }
+
+  .btn-outline-danger {
+      background-color: transparent;
+      border-color: $danger;
+      color: $danger;
+
+      &:hover, &:focus {
+          background-color: $danger;
+          color: $white;
+      }
+  }
+
+  .btn-outline-warning {
+      background-color: transparent;
+      border-color: $warning;
+      color: $warning;
+
+      &:hover, &:focus {
+          background-color: $warning;
+          color: $white;
+      }
+  }
+
+  .btn-reg {
+      background-color: $link-active;
+      border-color: $link-active;
+  }
+
+  .btn-cancel {
+      background-color: $red;
+      border-color: $red;
+  }
+
+  .text-primary {
+      color: $primary;
+  }
+
+  .text-success {
+      color: $success;
+  }
+
+  .text-info {
+      color: $info;
+  }
+
+  .text-warning {
+      color: $warning;
+  }
+
+  .text-danger {
+      color: $danger;
+  }
+
+  .text-secondary {
+      color: $card;
+  }
+
+  .text-dark {
+      color: $dark;
+  }
+
+  .badge {
+      padding: 8px;
+      border-radius: 16px;
+  }
+
+  .badge-primary {
+      color: $white;
+      background-color: $primary;
+  }
+
+  .badge-success {
+      color: $white;
+      background-color: $success;
+  }
+
+  .badge-info {
+      color: $white;
+      background-color: $info;
+  }
+
+  .badge-warning {
+      color: $white;
+      background-color: $warning;
+  }
+
+  .badge-danger {
+      color: $white;
+      background-color: $danger;
+  }
+
+  .badge-secondary {
+      color: $white;
+      background-color: $card;
+  }
+
+  .badge-dark {
+      color: $white;
+      background-color: $dark;
+  }
+
+  .alert {
+      padding: 10px;
+      border-radius: 0.5rem;
+  }
+
+  .alert-primary {
+      color: $white;
+      background-color: $primary;
+      border-color: $primary;
+  }
+
+  .alert-success {
+      color: $white;
+      background-color: $success;
+      border-color: $success;
+  }
+
+  .alert-secondary {
+      color: $white;
+      background-color: $card;
+      border-color: $card;
+  }
+
+  .alert-info {
+      color: $white;
+      background-color: $info;
+      border-color: $info;
+  }
+
+  .alert-warning {
+      color: $white;
+      background-color: $warning;
+      border-color: $warning;
+  }
+
+  .alert-danger {
+      color: $white;
+      background-color: $danger;
+      border-color: $danger;
+  }
+
+  .alert-dark {
+      color: $white;
+      background-color: $dark;
+      border-color: $dark;
+  }
+
+  .form-control {
+      background-color: $form_input;
+      color: $white;
+      border-color: $form_input;
+      border-radius: 6px;
+
+      &:focus {
+          outline: 0;
+          box-shadow: 0 0 0 0.1rem rgba(115, 103, 240, 0.5);
+      }
+  }
+
+  .custom-modal {
+
+      .modal-dialog {
+
+          .modal-content {
+              background-color: $card;
+
+              .close {
+                  color: $white;
+              }
+          }
+      }
+  }
+
+  .nav-link  {
+      color: $link-active;
+
+      &.active {
+          background-color: $link-active;
+          border-radius: 0.5rem;
+          color: $white;
+      }
+  }
+
+  .menu-tabs {
+
+      .nav-link {
+        color: $primary;
+        background-color: $card;
+        margin-right: 5px;
+        margin-bottom: 1px;
+        border: none;
+        font-size: 15px;
+        font-weight: bold;
+
+        &.active {
+            background-color: $link-active;
+            border-radius: 0;
+            color: $white;
+            border: none;
+            border-top-left-radius: 0.25rem;
+            border-top-right-radius: 0.25rem;
+        }
+
+        &:hover, &:focus {
+            border: none;
+            background-color: $link-active;
+            color: $white;
+        }
+      }
+
+      .nav-tabs {
+        border-bottom: 5px solid $link-active;
+        min-width: 520px;
+      }
+  }
+
+  .list-avatar {
+      position: relative;
+      background-color: $black;
+      border: 2px solid $white;
+      border-radius: 25%;
+      width: 30px;
+      height: 30px;
+      transition: all 0.3s ease-in-out;
+
+      &:hover, &:focus {
+          border-radius: 50%;
+
+          .avatar-link {
+
+              .avatar {
+                  border-radius: 50%;
+              }
+          }
+      }
+
+      .avatar-link {
+
+        &:hover, &:focus {
+            cursor: pointer;
+        }
+
+          .avatar {
+              border-radius: 25%;
+              width: 100%;
+              height: 100%;
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: cover;
+              transition: all 0.3s ease-in-out;
+          }
+      }
+  }
+
+  .detail-label {
+      font-size: 16px;
+      font-weight: 700;
+  }
+
+  ul {
+      &.thumbnails, &.image_picker_selector {
+          li {
+              .thumbnail {
+                  border: 3px solid $white;
+                  width: 143px;
+                  height: 150px;
+                  border-radius: 8px;
+                  padding: 0;
+                  background-color: $white;
+
+                  &.selected {
+                      border-color: $primary;
+                      background-color: $primary;
+                  }
+
+                  .image_picker_image {
+                      width: 100%;
+                      height: 100%;
+                      border-radius: inherit;
+                  }
+              }
+          }
+      }
+  }
+
+  #side-header {
+
+      &:hover, &:focus {
+          text-decoration: none;
+      }
+  }
+
+  #side-header-img {
+      transition: all 0.3s ease-in-out;
+  }
+  .page-item {
+
+      &:first-child {
+          .page-link {
+              border-top-left-radius: 0.5rem;
+              border-bottom-left-radius: 0.5rem;
+          }
+      }
+
+      &:last-child {
+          .page-link {
+              border-top-right-radius: 0.5rem;
+              border-bottom-right-radius: 0.5rem;
+          }
+      }
+
+      &.active {
+          cursor: pointer;
+
+          .page-link {
+              color: $white;
+              background-color: $primary;
+          }
+      }
+
+      &.disabled {
+          .page-link {
+              color: $gray;
+          }
+      }
+
+      .page-link {
+          color: $primary;
+          background-color: $body;
+          border: none;
+          transition: all 0.3s ease-in-out;
+
+          &:hover, &:focus {
+              color: $white;
+              background-color: $primary;
+          }
+      }
+  }
+
+  .product-to-at {
+      &:hover, &:focus {
+
+          .card-custom {
+              transform: translateY(-4px);
+          }
+      }
+  }
+
+  .dropdown-header {
+      font-size: 24px;
+      color: $primary;
+  }
+
+  .notification-header {
+      background-color: $primary;
+      padding: 10px 15px;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+  }
+
+  .col-name {
+      min-width: 120px;
+  }
+
+    .col-att {
+        min-width: 175px;
+    }
+
+    .profile-overlay {
+        position: relative;
+        margin: 0 auto;
+        width: 160px;
+        height: 160px;
+        background-color: $black;
+        border-radius: 25%;
+        transition: all 0.3s ease-in-out;
+
+        &:hover, &:focus {
+            border-radius: 50%;
+
+            .profile-pic {
+                border-radius: 50%;
+            }
+
+            .btn-profile-upload {
+                opacity: 0.5;
+            }
+        }
+
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            border-radius: 25%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border: 3px solid $white;
+            transition: all 0.3s ease-in-out;
+        }
+    }
+}
+
+.swal-modal {
+    background-color: $card;
+    color: $white
+}
+
+.swal-button {
+    background-color: $primary;
+
+    &:not([disabled]):hover, &:focus {
+        background-color: $primary;
+    }
+}
+
+.swal-icon--success__hide-corners {
+    background-color: $card;
+}
+
+.swal-icon--success {
+
+    &:after, &:before {
+        background-color: $card;
+    }
+}
+
+.swal-icon--success__ring {
+    border: 4px solid hsla(98,55%,69%,1);
+}
+
+.swal-text {
+    color: $white
+}
+
+@media only screen and (max-width: 767px) {
+    #admin {
+
+        .menu-tabs {
+            overflow-x: overlay;
+        }
+    }
+}
