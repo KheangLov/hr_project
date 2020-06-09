@@ -93,6 +93,7 @@ class UserController extends Controller
             return redirect()
                 ->route('user_list')
                 ->withErrors($validator)
+                ->withInput()
                 ->with('error', 'There are some errors, please check!');
         }
 

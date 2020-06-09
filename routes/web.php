@@ -33,6 +33,9 @@ Route::post('/admin/attendance/approval', 'AttendanceController@approval')->name
 Route::get('/admin/get-unit-by-department/{id}', 'UserController@get_unit_by_department');
 Route::get('/admin/get-group-by-unit/{id}', 'UserController@get_group_by_unit');
 Route::post('/admin/staff/search', 'UserController@staff_search')->name('user_search');
+Route::post('/admin/attendance/click/start', 'ClickAttendanceController@startWork')->name('staff_start_work');
+Route::post('/admin/attendance/staff/note', 'ClickAttendanceController@staffNote')->name('staff_note');
+Route::put('/admin/attendance/click/end', 'ClickAttendanceController@endWork')->name('staff_end_work');
 
 Route::group(['middleware' => ['admin']], function () {
     Route::get('/admin/user', 'UserController@index')->name('user_list');
@@ -75,6 +78,9 @@ Route::group(['middleware' => ['admin']], function () {
     Route::put('/admin/position/update/{id}', 'PositionController@update')->name('position_update');
     Route::get('/admin/position/delete/{id}', 'PositionController@delete')->name('position_delete');
     Route::post('/admin/position/search', 'PositionController@search')->name('position_search');
+
+    Route::get('/admin/attendance-click/list', 'ClickAttendanceController@list')->name('click_attendance_list');
+    Route::put('/admin/attendance-click/hrnote/{id}', 'ClickAttendanceController@hrNote')->name('hr_note');
 });
 
 Route::get('/mark-as-read', function() {

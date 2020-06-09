@@ -877,6 +877,10 @@ $(document).ready(function(e) {
         });
     });
 
+    $('.btn_hr_note').on('click', function() {
+        $('#form_hr_note').modal('show');
+    });
+
     // $('#first_app_comment').on('click', function (e) {
     //     const comment = $('#comment').val();
     //     if (!comment) $('#comment_message').text('Please insert comment!');

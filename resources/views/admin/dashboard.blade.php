@@ -12,8 +12,43 @@
             </span>
         </div>
         <div class="card-body">
-            <h2 class="card-title">Welcome user {{ $message->name }}!</strong></h2>
+            <h2 class="card-title">Welcome user {{ Auth::user()->name }}!</strong></h2>
             <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        </div>
+    </div>
+@endif
+@if (Session::has('status'))
+    @push('scripts')
+        <script type="text/javascript">
+            $(function() {
+                $('#form_staff_note').modal({backdrop: 'static', keyboard: false});
+                window.onbeforeunload = function(e) {
+                    if (!$('#staff_note').val()) {
+                        e.returnValue = "Please fill out the reason!";
+                    }
+                };
+            });
+        </script>
+    @endpush
+    <div class="modal custom-modal fade" id="form_staff_note" tabindex="-1" role="dialog" aria-labelledby="form_staff_note" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <form action="{{ route('staff_note') }}" method="POST">
+                @csrf
+                <input type="hidden" name="date" value="{{ Session::get('date') }}">
+                <input type="hidden" name="status" value="{{ Session::get('status') }}">
+                <div class="modal-content text-white">
+                    <div class="modal-header">
+                        <h2 class="modal-title font-weight-bold text-truncate text-capitalize">Why are you late?</h2>
+                    </div>
+                    <div class="modal-body">
+                        <label for="staff_note">Reason:</label>
+                        <textarea class="form-control" name="staff_note" id="staff_note" cols="3" rows="5"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 @endif
@@ -67,7 +102,7 @@
             </div>
         </div>
     </div> --}}
-    {{-- @if (Auth::user()->role->name != 'admin')
+    @if (Auth::user()->role->name != 'admin')
         <div class="col mb-4">
             <div class="card card-custom bg-color" style="border-radius: 0.25rem;">
                 <div class="card-header">
@@ -76,15 +111,22 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <button class="btn btn-primary">Start work</button>
+                            <form action="{{ route('staff_start_work') }}" method="POST">
+                                @csrf
+                                <button class="btn btn-primary" type="submit">Start work</button>
+                            </form>
                         </div>
                         <div class="col text-right">
-                            <button class="btn btn-danger">Exit work</button>
+                            <form action="{{ route('staff_end_work') }}" method="POST">
+                                @method('PUT')
+                                @csrf
+                                <button class="btn btn-danger">Exit work</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    @endif --}}
+    @endif
 </div>
 @endsection

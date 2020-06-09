@@ -177,6 +177,7 @@ return [
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         Dingo\Api\Provider\LaravelServiceProvider::class,
+        Stevebauman\Location\LocationServiceProvider::class,
 
     ],
 

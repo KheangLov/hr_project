@@ -5,6 +5,7 @@ namespace App\Api\V1\Controllers;
 use App\Api\V1\Requests\AttendanceRequest;
 use App\Http\Controllers\Controller;
 use App\Attendance;
+use App\ClickAttendance;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,8 @@ class AttendanceController extends Controller
 {
     public function __construct()
     {
+        $this->ipInfo = file_get_contents('https://ipapi.co/ip/');
+        $this->clientInformation = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $this->ipInfo));
         $this->middleware('jwt.auth', []);
     }
 
@@ -51,6 +54,124 @@ class AttendanceController extends Controller
         return response()->json([
             'attendance' => $attendance,
             'status' => 'ok',
+        ]);
+    }
+
+    public function clickAttendance()
+    {
+        if ($this->ipInfo != '110.74.219.98') {
+            return response()->json([
+                'message' => 'Wrong IP!',
+                'status' => 'error',
+                'code' => 400
+            ]);
+        }
+
+        $status = 0;
+        $strtime = strtotime('08:00:00');
+        $start_time = date('H:i:s', $strtime);
+        $now = Carbon::now($this->clientInformation['geoplugin_timezone']);
+        $date = $now->toDateString();
+        $time = $now->toTimeString();
+        $clicked = ClickAttendance::where('date', $date)
+            ->where('user_id', Auth::user()->id)
+            ->get();
+
+        if (count($clicked) > 0) {
+            if ($clicked[0]->real_time_out != null) {
+                return response()->json([
+                    'message' => 'You have ended work!',
+                    'status' => 'error',
+                    'code' => 400
+                ]);
+            }
+            return response()->json([
+                'message' => 'You have clicked already!',
+                'status' => 'error',
+                'code' => 400
+            ]);
+        }
+
+        if ($time < '07:00:00' || $time > '17:30:00') {
+            return response()->json([
+                'message' => 'Wait until 7am!',
+                'status' => 'error',
+                'code' => 400
+            ]);
+        }
+        if (strtolower($this->clientInformation['geoplugin_city']) != 'phnom penh') {
+            return response()->json([
+                'message' => 'You can not click from your current location!',
+                'status' => 'error',
+                'code' => 400
+            ]);
+        }
+
+        if ($start_time > $time) {
+            $status = 1;
+        }
+
+        $data = [
+            'name' => auth()->guard('api')->user()->name,
+            'date' => $date,
+            'real_time_in' => $time,
+            'status' => $status,
+            'user_id' => auth()->guard('api')->user()->id
+        ];
+
+        $clickAtt = ClickAttendance::create($data);
+        return response()->json([
+            'clickAtt' => $clickAtt,
+            'status' => 'ok',
+            'code' => 200
+        ]);
+    }
+
+    public function endWork()
+    {
+        if ($this->ipInfo != '110.74.219.98') {
+            return response()->json([
+                'message' => 'Wrong IP!',
+                'status' => 'error',
+                'code' => 400
+            ]);
+        }
+
+        $strtime = strtotime('17:30:00');
+        $end_time = date('H:i:s', $strtime);
+        $now = Carbon::now($this->clientInformation['geoplugin_timezone']);
+        $date = $now->toDateString();
+        $time = Carbon::createFromFormat('H:i:s', $now->toTimeString());
+
+        $clicked = ClickAttendance::where('date', $date)
+            ->where('user_id', Auth::user()->id)
+            ->get();
+
+        if (count($clicked) < 0 || $clicked[0]->real_time_in == null) {
+            return response()->json([
+                'message' => 'You have not clicked yet!',
+                'status' => 'error',
+                'code' => 400
+            ]);
+        }
+
+        if ($clicked[0]->real_time_out != null) {
+            return response()->json([
+                'message' => 'Already ended work!',
+                'status' => 'error',
+                'code' => 400
+            ]);
+        }
+
+        $total_time = Carbon::createFromFormat('H:i:s', $clicked[0]->real_time_in)->diffInHours($time);
+        $clicked[0]->real_time_out = $time;
+        $clicked[0]->total_time = $total_time;
+        $clicked[0]->save();
+        $clicked[0]->update();
+        return response()->json([
+            'message' => 'Data updated!',
+            'status' => 'ok',
+            'code' => 200
         ]);
     }
 

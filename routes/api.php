@@ -36,6 +36,8 @@ $api->version('v1', function (Router $api) {
         $api->get('me', 'App\\Api\\V1\\Controllers\\UserController@me');
         $api->get('list', 'App\\Api\\V1\\Controllers\\UserController@list');
         $api->post('leave', 'App\\Api\\V1\\Controllers\\AttendanceController@leave');
+        $api->post('attendance/click', 'App\\Api\\V1\\Controllers\\AttendanceController@clickAttendance');
+        $api->put('attendance/click/endwork', 'App\\Api\\V1\\Controllers\\AttendanceController@endWork');
     });
 
     $api->group(['middleware' => 'jwt.auth'], function(Router $api) {

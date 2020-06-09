@@ -6,6 +6,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Tymon\JWTAuth\JWTAuth;
 use App\Http\Controllers\Controller;
 use App\Api\V1\Requests\LoginRequest;
+use App\User;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Auth;
@@ -31,6 +32,15 @@ class LoginController extends Controller
      */
     public function login(LoginRequest $request, JWTAuth $JWTAuth)
     {
+        $checkRole = User::where('email', $request->email)->get();
+        if (!empty($checkRole) && $checkRole[0]->role->name == 'admin') {
+            return response()
+                ->json([
+                    'status' => 'erorr',
+                    'code' => 400,
+                    'message' => 'Can not login!'
+                ]);
+        }
         $credentials = $request->only(['email', 'password']);
 
         try {
