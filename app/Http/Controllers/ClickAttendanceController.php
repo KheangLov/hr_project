@@ -28,7 +28,9 @@ class ClickAttendanceController extends Controller
         //     return redirect()->route('admin_dashboard');
         // }
         // dd($this->clientInformation);
-        dd(request()->getClientIp());
+        $ip = trim(shell_exec("dig +short myip.opendns.com @resolver1.opendns.com"));
+
+        dd("Public IP: ".$ip);
         $status = 0;
         $strtime = strtotime('08:00:00');
         $start_time = date('H:i:s', $strtime);
