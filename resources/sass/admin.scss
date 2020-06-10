@@ -322,6 +322,7 @@ html, body {
                 .btn-action {
                     text-decoration: none;
                     color: $white;
+                    transition: all ease-in-out 0.2s;
                 }
 
                 .btn-edit {
@@ -801,6 +802,7 @@ html, body {
       border-radius: 25%;
       width: 30px;
       height: 30px;
+      text-align: center;
       transition: all 0.3s ease-in-out;
 
       &:hover, &:focus {

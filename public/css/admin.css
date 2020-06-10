@@ -11260,6 +11260,7 @@ body {
 #admin .main-wrapper .card-custom .custom-table .btn-action {
   text-decoration: none;
   color: #fff;
+  transition: all ease-in-out 0.2s;
 }
 
 #admin .main-wrapper .card-custom .custom-table .btn-edit:hover,
@@ -11726,6 +11727,7 @@ body {
   border-radius: 25%;
   width: 30px;
   height: 30px;
+  text-align: center;
   transition: all 0.3s ease-in-out;
 }
 

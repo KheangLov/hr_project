@@ -30,6 +30,9 @@
                 <th scope="row">{{ $no . $i }}</th>
                 <td>
                     <div class="list-avatar">
+                        <div class="spinner-border text-light spinner-border-sm d-none" role="status" id="avatar_spinner_{{ $user->id }}" style="transition: all ease-in-out 0.2s;">
+                            <span class="sr-only">Loading...</span>
+                        </div>
                         <a class="avatar-link view_user_detail" data-id="{{ $user->id }}" data-toggle="tooltip" data-placement="top" title="View">
                             <div class="avatar" style="background-image: url('{{ asset($user->profile ? $user->profile : 'images/avatar_profile_user_music_headphones_shirt_cool-512.png') }}');"></div>
                         </a>
@@ -53,6 +56,9 @@
                 <td>{{ $user->role->name }}</td>
                 <td>
                     <div class="d-flex">
+                        <div class="spinner-border text-light spinner-border-sm mr-3 d-none" role="status" id="spinner_{{ $user->id }}" style="transition: all ease-in-out 0.2s;">
+                            <span class="sr-only">Loading...</span>
+                        </div>
                         <a type="button" class="btn-action btn-edit user_edit" data-id="{{ $user->id }}" data-toggle="tooltip" data-placement="bottom" title="Edit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3 h-5 w-5 mr-3 hover:text-primary cursor-pointer">
                                 <path d="M12 20h9"></path>

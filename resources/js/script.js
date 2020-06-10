@@ -695,6 +695,9 @@ $(document).ready(function(e) {
 
     $('.user_edit').on('click', function (e) {
         const id = $(this).attr('data-id');
+        const userEdit = $(this);
+        userEdit.addClass('d-none');
+        $(`#spinner_${id}`).removeClass('d-none');
         $.ajax({
             type: "GET",
             url: `/admin/user/edit/${id}`,
@@ -704,6 +707,8 @@ $(document).ready(function(e) {
             success: function(data) {
                 $('#user_edit_modal').html(data);
                 $('#form_edit_user').modal('show');
+                userEdit.removeClass('d-none');
+                $(`#spinner_${id}`).addClass('d-none');
                 getUnitByDepartment();
                 getGroupByUnit();
                 profileImageEdit();
@@ -773,6 +778,9 @@ $(document).ready(function(e) {
 
     $('.view_user_detail').on('click', function (e) {
         const id = $(this).attr('data-id');
+        const detail = $(this);
+        detail.addClass('d-none');
+        $(`#avatar_spinner_${id}`).removeClass('d-none');
         $.ajax({
             type: "GET",
             url: `/admin/user/detail/${id}`,
@@ -782,6 +790,8 @@ $(document).ready(function(e) {
             success: function(data) {
                 $('#user_detail_dialog').html(data);
                 $('#form_user_detail').modal('show');
+                detail.removeClass('d-none');
+                $(`#avatar_spinner_${id}`).addClass('d-none');
             }
         });
     });
