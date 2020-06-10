@@ -341,7 +341,7 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav" id="app">
-                        <li class="nav-item dropdown custom-dropdown">
+                        {{-- <li class="nav-item dropdown custom-dropdown">
                             <a style="padding: 1rem;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Lang
                             </a>
@@ -352,7 +352,7 @@
                                     </a>
                                 @endforeach
                             </div>
-                          </li>
+                        </li> --}}
                         <li class="nav-item">
                             <div class="current-user text-right">
                                 <span class="user-name d-block">
