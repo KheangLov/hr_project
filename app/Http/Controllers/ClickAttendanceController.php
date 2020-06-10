@@ -27,7 +27,8 @@ class ClickAttendanceController extends Controller
         //     alert()->error('Wrong IP!');
         //     return redirect()->route('admin_dashboard');
         // }
-        dd($this->clientInformation);
+        // dd($this->clientInformation);
+        dd(request()->getClientIp());
         $status = 0;
         $strtime = strtotime('08:00:00');
         $start_time = date('H:i:s', $strtime);
