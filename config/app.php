@@ -180,6 +180,7 @@ return [
         Stevebauman\Location\LocationServiceProvider::class,
         Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
+        PragmaRX\Firewall\Vendor\Laravel\ServiceProvider::class,
 
     ],
 
@@ -235,6 +236,7 @@ return [
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Lava' => Khill\Lavacharts\Laravel\LavachartsFacade::class,
+        'Firewall' => PragmaRX\Firewall\Vendor\Laravel\Facade::class,
 
     ],
 

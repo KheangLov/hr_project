@@ -23,6 +23,7 @@
         "mcamara/laravel-localization": "^1.5",
         "mervick/material-design-icons": "^2.2",
         "nesbot/carbon": "^2.32",
+        "pragmarx/firewall": "^2.3",
         "pusher/pusher-php-server": "^4.1",
         "stevebauman/location": "^5.0",
         "stichoza/google-translate-php": "^4.1",

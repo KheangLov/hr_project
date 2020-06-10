@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Location;
+use Firewall;
 
 class ClickAttendanceController extends Controller
 {
@@ -28,9 +29,7 @@ class ClickAttendanceController extends Controller
         //     return redirect()->route('admin_dashboard');
         // }
         // dd($this->clientInformation);
-        $ip = trim(shell_exec("dig +short myip.opendns.com @resolver1.opendns.com"));
-
-        dd("Public IP: ".$ip);
+        dd(Firewall::getIp());
         $status = 0;
         $strtime = strtotime('08:00:00');
         $start_time = date('H:i:s', $strtime);
