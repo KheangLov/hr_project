@@ -29,13 +29,12 @@
         </div>
     </div>
     <div id="admin" class="d-none">
-
         <aside id="sidebar" class="sidebar">
             <a href="{{ route('admin_dashboard') }}" class="sidebar-header">
                 <span id="side-header" class="header-title font-weight-bolder">{{ config('app.name', 'Laravel Admin') }}</span>
             </a>
             <a href="{{ route('admin_dashboard') }}" class="sidebar-link">
-                <div class="inner-link{{ (request()->is('admin')) ? ' active' : '' }}">
+                <div class="inner-link{{ (request()->is(LaravelLocalization::getCurrentLocale() != 'en' ? LaravelLocalization::getCurrentLocale() . '/admin' : 'admin')) ? ' active' : '' }}">
                     <span class="link-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
                             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
@@ -46,7 +45,7 @@
                 </div>
             </a>
             <a href="{{ route(Auth::user()->role_id == 1 ? 'user_list' : 'staff_list') }}" class="sidebar-link">
-                <div class="inner-link{{ (request()->is('admin/user') || request()->is('admin/user/*') || request()->is('admin/staff') || request()->is('admin/staff/*'))  ? ' active' : '' }}">
+                <div class="inner-link{{ (request()->is(LaravelLocalization::getCurrentLocale() != 'en' ? LaravelLocalization::getCurrentLocale() . '/admin/user' : 'admin/user') || request()->is(LaravelLocalization::getCurrentLocale() != 'en' ? LaravelLocalization::getCurrentLocale() . '/admin/user/*' : 'admin/user/*') || request()->is(LaravelLocalization::getCurrentLocale() != 'en' ? LaravelLocalization::getCurrentLocale() . '/admin/staff' : 'admin/staff') || request()->is(LaravelLocalization::getCurrentLocale() != 'en' ? LaravelLocalization::getCurrentLocale() . '/admin/staff/*' : 'admin/staff/*'))  ? ' active' : '' }}">
                     <span class="link-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user ">
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -57,7 +56,7 @@
                 </div>
             </a>
             <a href="{{ route('staff_my_leave') }}" class="sidebar-link">
-                <div class="inner-link{{ (request()->is('admin/attendance') || request()->is('admin/attendance/*')) ? ' active' : '' }}">
+                <div class="inner-link{{ (request()->is(LaravelLocalization::getCurrentLocale() != 'en' ? LaravelLocalization::getCurrentLocale() . '/admin/attendance' : 'admin/attendance') || request()->is(LaravelLocalization::getCurrentLocale() != 'en' ? LaravelLocalization::getCurrentLocale() . '/admin/attendance/*' : 'admin/attendance/*')) ? ' active' : '' }}">
                     <span class="link-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar "><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                     </span>
@@ -66,7 +65,7 @@
             </a>
             @if (Auth::user()->role->name == 'admin')
                 <a href="{{ route('click_attendance_list') }}" class="sidebar-link">
-                    <div class="inner-link{{ (request()->is('admin/attendance-click') || request()->is('admin/attendance-click/*')) ? ' active' : '' }}">
+                    <div class="inner-link{{ (request()->is(LaravelLocalization::getCurrentLocale() != 'en' ? LaravelLocalization::getCurrentLocale() . '/admin/attendance-click' : 'admin/attendance-click') || request()->is(LaravelLocalization::getCurrentLocale() != 'en' ? LaravelLocalization::getCurrentLocale() . '/admin/attendance-click/*' : 'admin/attendance-click/*')) ? ' active' : '' }}">
                         <span class="link-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-square "><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
                         </span>
@@ -336,12 +335,24 @@
                                 @elseif (request()->is('admin/attendance') || request()->is('admin/attendance/*'))
                                     Attendance
                                 @elseif (request()->is('admin'))
-                                    Dashboard
+                                    @lang('nav.dashboard')
                                 @endif
                             </h2>
                         </li>
                     </ul>
                     <ul class="navbar-nav" id="app">
+                        <li class="nav-item dropdown custom-dropdown">
+                            <a style="padding: 1rem;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Lang
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right custom-dropdown-menu" aria-labelledby="navbarDropdown">
+                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                    <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                        {{ $properties['native'] }}
+                                    </a>
+                                @endforeach
+                            </div>
+                          </li>
                         <li class="nav-item">
                             <div class="current-user text-right">
                                 <span class="user-name d-block">
@@ -391,7 +402,7 @@
                 </div>
             </nav>
             @include('admin.user.share.password')
-            @if (Auth::user()->role_id == 1 && !request()->is('admin') && !request()->is('admin/attendance') && !request()->is('admin/attendance/*') && !request()->is('admin/attendance-click') && !request()->is('admin/attendance-click/*'))
+            @if (Auth::user()->role_id == 1 && !request()->is(LaravelLocalization::getCurrentLocale() != 'en' ? LaravelLocalization::getCurrentLocale() . '/admin' : 'admin') && !request()->is(LaravelLocalization::getCurrentLocale() != 'en' ? LaravelLocalization::getCurrentLocale() . '/admin/attendance' : 'admin/attendance') && !request()->is(LaravelLocalization::getCurrentLocale() != 'en' ? LaravelLocalization::getCurrentLocale() . '/admin/attendance/*' : 'admin/attendance/*') && !request()->is(LaravelLocalization::getCurrentLocale() != 'en' ? LaravelLocalization::getCurrentLocale() . '/admin/attendance-click' : 'admin/attendance-click') && !request()->is(LaravelLocalization::getCurrentLocale() != 'en' ? LaravelLocalization::getCurrentLocale() . '/admin/attendance-click/*' : 'admin/attendance-click/*'))
                 <nav class="menu-tabs">
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a href="{{ route('user_list') }}" class="nav-item nav-link{{ request()->is('admin/user') || request()->is('admin/user/*') ? ' active' : '' }}">Staff Board</a>
