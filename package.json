@@ -1,4 +1,12 @@
 {
+    "name": "hr_project",
+    "version": "1.0.0",
+    "keywords": [
+        "hr_project",
+        "heroku"
+    ],
+    "author": "lovsokheang",
+    "license": "MIT",
     "private": true,
     "scripts": {
         "dev": "npm run development",
@@ -33,5 +41,8 @@
         "laravel-echo": "^1.7.0",
         "pusher-js": "^5.1.1",
         "sweetalert": "^2.1.2"
+    },
+    "engines": {
+        "node": "12.x"
     }
 }
