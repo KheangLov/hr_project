@@ -16,20 +16,20 @@ class ClickAttendanceController extends Controller
 {
     public function __construct()
     {
-        $this->ipInfo = file_get_contents('https://ipapi.co/ip/');
-        $this->clientInformation = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . request()->ip()));
+        // $this->ipInfo = file_get_contents('https://ipapi.co/ip/');
+        $this->ipInfo = Firewall::getIp();
+        $this->clientInformation = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $this->ipInfo));
         $this->middleware(['auth']);
     }
 
     public function startWork(Request $request)
     {
         // dd(request()->ip());
-        // if ($this->ipInfo != '110.74.219.98') {
-        //     alert()->error('Wrong IP!');
-        //     return redirect()->route('admin_dashboard');
-        // }
+        if ($this->ipInfo != '110.74.219.98') {
+            alert()->error('Wrong IP!');
+            return redirect()->route('admin_dashboard');
+        }
         // dd($this->clientInformation);
-        dd(Firewall::getIp());
         $status = 0;
         $strtime = strtotime('08:00:00');
         $start_time = date('H:i:s', $strtime);
