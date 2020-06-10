@@ -928,6 +928,10 @@ $(document).ready(function(e) {
         $('#form_hr_note').modal('show');
     });
 
+    $('.btn_work').on('click', function() {
+        $($(this).attr('data-id')).removeClass('d-none');
+    });
+
     // $('#first_app_comment').on('click', function (e) {
     //     const comment = $('#comment').val();
     //     if (!comment) $('#comment_message').text('Please insert comment!');

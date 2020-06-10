@@ -24,12 +24,11 @@ class ClickAttendanceController extends Controller
 
     public function startWork(Request $request)
     {
-        // dd(request()->ip());
         if ($this->ipInfo != '110.74.219.98') {
             alert()->error('Wrong IP!');
             return redirect()->route('admin_dashboard');
         }
-        // dd($this->clientInformation);
+
         $status = 0;
         $strtime = strtotime('08:00:00');
         $start_time = date('H:i:s', $strtime);

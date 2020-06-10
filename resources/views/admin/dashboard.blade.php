@@ -113,14 +113,22 @@
                         <div class="col">
                             <form action="{{ route('staff_start_work') }}" method="POST">
                                 @csrf
-                                <button class="btn btn-primary" type="submit">Start work</button>
+                                <button class="btn btn-primary btn_work" type="submit" data-id="#start_work_spinner">
+                                    <span class="spinner-border spinner-border-sm d-none" id="start_work_spinner" aria-hidden="true" style="transition: all ease-in-out 0.2s;">
+                                    </span>
+                                    <span>Start work</span>
+                                </button>
                             </form>
                         </div>
                         <div class="col text-right">
                             <form action="{{ route('staff_end_work') }}" method="POST">
                                 @method('PUT')
                                 @csrf
-                                <button class="btn btn-danger">Exit work</button>
+                                <button class="btn btn-danger btn_work" type="submit" data-id="#end_work_spinner">
+                                    <span class="spinner-border spinner-border-sm d-none" id="end_work_spinner" aria-hidden="true" style="transition: all ease-in-out 0.2s;">
+                                    </span>
+                                    <span>Exit work</span>
+                                </button>
                             </form>
                         </div>
                     </div>
