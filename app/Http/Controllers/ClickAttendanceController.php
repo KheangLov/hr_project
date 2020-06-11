@@ -24,10 +24,10 @@ class ClickAttendanceController extends Controller
 
     public function startWork(Request $request)
     {
-        if ($this->ipInfo != '175.100.20.221') {
-            alert()->error('Wrong IP!');
-            return redirect()->route('admin_dashboard');
-        }
+        // if ($this->ipInfo != '175.100.20.221') {
+        //     alert()->error('Wrong IP!');
+        //     return redirect()->route('admin_dashboard');
+        // }
 
         $status = 0;
         $strtime = strtotime('08:00:00');
@@ -103,10 +103,10 @@ class ClickAttendanceController extends Controller
     }
 
     public function endWork(Request $request) {
-        if ($this->ipInfo != '110.74.219.98') {
-            alert()->error('Wrong IP!');
-            return redirect()->route('admin_dashboard');
-        }
+        // if ($this->ipInfo != '110.74.219.98') {
+        //     alert()->error('Wrong IP!');
+        //     return redirect()->route('admin_dashboard');
+        // }
 
         $strtime = strtotime('17:30:00');
         $end_time = date('H:i:s', $strtime);
