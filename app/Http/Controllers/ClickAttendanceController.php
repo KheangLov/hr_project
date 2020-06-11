@@ -127,6 +127,11 @@ class ClickAttendanceController extends Controller
         }
 
         $total_time = Carbon::createFromFormat('H:i:s', $clicked[0]->real_time_in)->diffInHours($time);
+        if ($total_time < 4) {
+            alert()->error('Can not ended work yet!');
+            return redirect()->route('admin_dashboard');
+        }
+
         $clicked[0]->real_time_out = $time;
         $clicked[0]->total_time = $total_time;
         $clicked[0]->save();

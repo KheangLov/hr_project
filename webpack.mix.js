@@ -13,6 +13,7 @@ const mix = require('laravel-mix');
 
 mix.sass('resources/sass/app.scss', 'public/css')
    .sass('resources/sass/admin.scss', 'public/css')
+   .sass('resources/sass/auth.scss', 'public/css')
    .js('resources/js/app.js', 'public/js').sourceMaps();
 
 mix.browserSync(process.env.MIX_SENTRY_DSN_PUBLIC);
