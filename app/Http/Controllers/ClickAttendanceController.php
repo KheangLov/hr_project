@@ -24,7 +24,7 @@ class ClickAttendanceController extends Controller
 
     public function startWork(Request $request)
     {
-        if ($this->ipInfo != '110.74.219.98') {
+        if ($this->ipInfo != '175.100.20.221') {
             alert()->error('Wrong IP!');
             return redirect()->route('admin_dashboard');
         }
