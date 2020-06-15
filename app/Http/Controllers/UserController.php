@@ -262,6 +262,22 @@ class UserController extends Controller
 		return redirect()->route('user_list')->with('success', 'User updated!');
     }
 
+    public function edit_password($id)
+    {
+        $user = User::find($id);
+        return view('admin.user.share.password', [
+            'type' => 'user',
+            'user' => $user
+        ]);
+    }
+
+    public function changeUserPassword($id)
+    {
+        $user = User::find($id);
+        return redirect()->route('user_list')->with('success', "User's password updated!");
+    }
+
+
     public function changePassword(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [

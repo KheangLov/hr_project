@@ -716,6 +716,26 @@ $(document).ready(function(e) {
         });
     });
 
+    $('.user_password').on('click', function (e) {
+        const id = $(this).attr('data-id');
+        const userEdit = $(this);
+        userEdit.addClass('d-none');
+        $(`#spinner_${id}`).removeClass('d-none');
+        $.ajax({
+            type: "GET",
+            url: `/admin/user/edit/${id}`,
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function(data) {
+                $('#user_password_modal').html(data);
+                $('#form_edit_user').modal('show');
+                userEdit.removeClass('d-none');
+                $(`#spinner_${id}`).addClass('d-none');
+            }
+        });
+    });
+
     $('.department_edit').on('click', function (e) {
         const id = $(this).attr('data-id');
         $.ajax({

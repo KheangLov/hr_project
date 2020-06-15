@@ -57,6 +57,8 @@ Route::group([
         Route::get('/admin/user/edit/{id}', 'UserController@edit')->name('user_edit');
         Route::put('/admin/user/update/{id}', 'UserController@update')->name('user_update');
         Route::put('/admin/user/password/{id}', 'UserController@changePassword')->name('user_password');
+        Route::get('/admin/password/{id}', 'UserController@edit_password')->name('user_edit_password');
+        Route::put('/admin/password/{id}', 'UserController@changeUserPassword')->name('user_change_password');
         Route::get('/admin/user/delete/{id}', 'UserController@delete')->name('user_delete');
         Route::post('/admin/user/search', 'UserController@search')->name('user_search');
         Route::get('/admin/user/notifications', 'UserController@notifications')->name('user_notification');
