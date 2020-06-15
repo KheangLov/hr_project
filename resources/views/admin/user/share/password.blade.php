@@ -1,4 +1,4 @@
-<div class="modal custom-modal fade" id="form_password" tabindex="-1" role="dialog" aria-labelledby="form_password" aria-hidden="true">
+<div class="modal custom-modal fade" id="form{{ !empty($type) ? '_' . $type : '' }}_password" tabindex="-1" role="dialog" aria-labelledby="form{{ !empty($type) ? '_' . $type : '' }}_password" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <form action="{{ route('user_password', ['id' => Auth::user()->id]) }}" method="POST">
             @method('PUT')
@@ -12,16 +12,21 @@
                 </div>
                 <div class="modal-body">
                     <div class="row justify-content-center">
-                        <div class="form-group col-md-12">
-                            <label for="old_password">{{ __('Old Password') }}</label>
-                            <input id="old_password" type="password" class="form-control @error('old-password') is-invalid @enderror" name="old_password" required autocomplete="old-password">
+                        @if (empty($type) || $type != 'user')
+                            <div class="form-group col-md-12">
+                                <label for="old_password">{{ __('Old Password') }}</label>
+                                <input id="old_password" type="password" class="form-control @error('old-password') is-invalid @enderror" name="old_password" required autocomplete="old-password">
 
-                            @error('old-password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                                @error('old-password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        @endif
+                        @if (!empty($type) && $type == 'user')
+
+                        @endif
                         <div class="form-group col-md-12">
                             <label for="password">{{ __('Password') }}</label>
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">

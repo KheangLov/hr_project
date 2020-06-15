@@ -178,8 +178,6 @@ return [
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         Dingo\Api\Provider\LaravelServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
-        Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
-        ConsoleTVs\Charts\ChartsServiceProvider::class,
         PragmaRX\Firewall\Vendor\Laravel\ServiceProvider::class,
 
     ],
