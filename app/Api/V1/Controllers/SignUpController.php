@@ -21,14 +21,14 @@ class SignUpController extends Controller
             'status' => $request->status,
             'email' => $request->email,
             'password' => $request->password,
-            'department_id' => $request->department,
-            'unit_id' => $request->unit,
-            'group_id' => $request->group,
-            'supervisor_id' => $request->supervisor,
-            'position_id' => $request->position,
+            'department_id' => $request->department_id,
+            'unit_id' => $request->unit_id,
+            'group_id' => $request->group_id,
+            'supervisor_id' => $request->supervisor_id,
+            'position_id' => $request->position_id,
             'annual_leave' => $request->annual_leave,
             'salary' => $request->salary,
-            'back_account' => $request->bank_account,
+            'bank_account' => $request->bank_account,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
             'phone' => $request->phone,
@@ -54,17 +54,17 @@ class SignUpController extends Controller
             throw new HttpException(500);
         }
 
-        if(!Config::get('boilerplate.sign_up.release_token')) {
-            return response()->json([
-                'status' => 'ok'
-            ], 201);
-        }
+        // if(!Config::get('boilerplate.sign_up.release_token')) {
+        //     return response()->json([
+        //         'status' => 'ok'
+        //     ], 200);
+        // }
 
         $token = $JWTAuth->fromUser($user);
         return response()->json([
             'status' => 'ok',
             'token' => $token,
-            'user' => $user
-        ], 201);
+            'data' => $user
+        ], 200);
     }
 }

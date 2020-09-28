@@ -36,10 +36,10 @@ class LoginController extends Controller
         if (!empty($checkRole) && $checkRole[0]->role->name == 'admin') {
             return response()
                 ->json([
-                    'status' => 'erorr',
-                    'code' => 400,
+                    'status' => 'error',
+                    'status_code' => 403,
                     'message' => 'Can not login!'
-                ]);
+                ], 403);
         }
         $credentials = $request->only(['email', 'password']);
 
@@ -59,7 +59,7 @@ class LoginController extends Controller
                 'status' => 'ok',
                 'token' => $token,
                 'expires_in' => auth()->guard('api')->factory()->getTTL(),
-                'user' => auth()->guard('api')->user()
+                'data' => auth()->guard('api')->user()
             ]);
     }
 }

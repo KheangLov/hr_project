@@ -35,4 +35,9 @@
         </div>
     </div>
 </div>
+
+<div>
+    <label for="phone">Price</label>
+    <input type="number" pattern="[0-9]*" data-politespace data-grouplength="3" data-delimiter="," data-reverse value="1234" />
+</div>
 @endsection

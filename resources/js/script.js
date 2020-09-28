@@ -1,4 +1,5 @@
 $(document).ready(function(e) {
+    $(document).trigger("enhance");
     // const checkWidth = function() {
     //     if ($(document).width() < 1196) {
     //         $('#btn_side_collapse').addClass('d-none');

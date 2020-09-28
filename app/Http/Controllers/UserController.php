@@ -212,14 +212,14 @@ class UserController extends Controller
         $user->dob = $request->dob;
         $user->status = $request->status;
         $user->email = $request->email;
-        $user->department_id = $request->department;
-        $user->unit_id = $request->unit;
-        $user->group_id = $request->group;
-        $user->supervisor_id = $request->supervisor;
-        $user->position_id = $request->position;
+        $user->department_id = $request->department_id;
+        $user->unit_id = $request->unit_id;
+        $user->group_id = $request->group_id;
+        $user->supervisor_id = $request->supervisor_id;
+        $user->position_id = $request->position_id;
         $user->annual_leave = $request->annual_leave;
         $user->salary = $request->salary;
-        $user->back_account = $request->bank_account;
+        $user->bank_account = $request->bank_account;
         $user->start_date = $request->start_date;
         $user->end_date = $request->end_date;
         $user->phone = $request->phone;
@@ -343,7 +343,6 @@ class UserController extends Controller
         $users = User::with('role')
             ->whereRaw('LOWER(`name`) LIKE ? ', ['%' . strtolower($request->search) .'%'])
             ->paginate(10);
-
         return view('admin.user.share.table', ['users' => $users]);
     }
 

@@ -12,6 +12,10 @@ use Auth;
 
 class RefreshController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['login']]);
+    }
     /**
      * Refresh a token.
      *
@@ -25,7 +29,7 @@ class RefreshController extends Controller
             'status' => 'ok',
             'token' => $token,
             'expires_in' => auth()->guard('api')->factory()->getTTL(),
-            'user' => auth()->guard('api')->user()
+            'data' => auth()->guard('api')->user()
         ]);
     }
 }

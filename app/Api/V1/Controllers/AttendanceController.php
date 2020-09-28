@@ -26,7 +26,10 @@ class AttendanceController extends Controller
         $leave_lists = Attendance::with('user')
             ->where('user_id', auth()->guard('api')->user()->id)
             ->get();
-        return response()->json($leave_lists);
+        return response()->json([
+            'status' => 'ok',
+            'data' => $leave_lists
+        ]);
     }
 
     public function leave(AttendanceRequest $req)
@@ -52,20 +55,20 @@ class AttendanceController extends Controller
 
         $attendance = Attendance::create($data);
         return response()->json([
-            'attendance' => $attendance,
+            'data' => $attendance,
             'status' => 'ok',
         ]);
     }
 
     public function clickAttendance()
     {
-        if ($this->ipInfo != '110.74.219.98') {
-            return response()->json([
-                'message' => 'Wrong IP!',
-                'status' => 'error',
-                'code' => 400
-            ]);
-        }
+        // if ($this->ipInfo != '110.74.219.98') {
+        //     return response()->json([
+        //         'message' => 'Wrong IP!',
+        //         'status' => 'error',
+        //         'code' => 400
+        //     ]);
+        // }
 
         $status = 0;
         $strtime = strtotime('08:00:00');
@@ -121,21 +124,20 @@ class AttendanceController extends Controller
 
         $clickAtt = ClickAttendance::create($data);
         return response()->json([
-            'clickAtt' => $clickAtt,
+            'data' => $clickAtt,
             'status' => 'ok',
-            'code' => 200
         ]);
     }
 
     public function endWork()
     {
-        if ($this->ipInfo != '110.74.219.98') {
-            return response()->json([
-                'message' => 'Wrong IP!',
-                'status' => 'error',
-                'code' => 400
-            ]);
-        }
+        // if ($this->ipInfo != '110.74.219.98') {
+        //     return response()->json([
+        //         'message' => 'Wrong IP!',
+        //         'status' => 'error',
+        //         'code' => 400
+        //     ]);
+        // }
 
         $strtime = strtotime('17:30:00');
         $end_time = date('H:i:s', $strtime);
@@ -170,8 +172,8 @@ class AttendanceController extends Controller
         $clicked[0]->update();
         return response()->json([
             'message' => 'Data updated!',
+            'data' => $clicked[0],
             'status' => 'ok',
-            'code' => 200
         ]);
     }
 

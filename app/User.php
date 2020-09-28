@@ -27,7 +27,7 @@ class User extends Authenticatable implements JWTSubject
         'status',
         'id_card',
         'annual_leave',
-        'back_account',
+        'bank_account',
         'salary',
         'start_date',
         'end_date',
@@ -58,7 +58,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'remember_token',
     ];
 
     /**
@@ -76,10 +76,10 @@ class User extends Authenticatable implements JWTSubject
      * @param  string  $value
      * @return void
      */
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = Hash::make($value);
-    }
+    // public function setPasswordAttribute($value)
+    // {
+    //     $this->attributes['password'] = Hash::make($value);
+    // }
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.

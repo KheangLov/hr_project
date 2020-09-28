@@ -8,7 +8,13 @@
 @import '~bootstrap/scss/bootstrap';
 
 @import '~image-picker/source/sass/image-picker.scss';
+// @import '~file-upload-with-preview/src/file-upload-with-preview.scss';
 
+
+.custom-file-container {
+    max-width: 400px;
+    margin: 0 auto;
+}
 /* width */
 ::-webkit-scrollbar {
   height: 5px;

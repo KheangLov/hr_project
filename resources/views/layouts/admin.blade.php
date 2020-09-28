@@ -13,9 +13,67 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/file-upload-with-preview@4.0.2/dist/file-upload-with-preview.min.css">
     <!-- Styles -->
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+    <style>
+        input {
+  font-family: monospace;
+}
+label {
+  display: block;
+}
+form > div {
+  margin: 0 0 1rem 0;
+}
+
+/*! politespace - v0.1.20 - 2016-09-26
+Politely add spaces to input values to increase readability (credit card numbers, phone numbers, etc).
+ * https://github.com/filamentgroup/politespace
+ * Copyright (c) 2016 Filament Group (@filamentgroup)
+ * MIT License */
+
+.politespace-proxy {
+	position: relative;
+	overflow: hidden; /* clearfix for floating siblings */
+	display: inline-block;
+}
+.politespace-proxy-val {
+	display: none;
+}
+.politespace-proxy.active.notempty > .politespace-proxy-val {
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	pointer-events: none;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	z-index: 1;
+}
+/* Safari 9 has a weird top/bottom margin on form elements inside of politespace proxies */
+/* This caused issues with proxy positioning.
+.politespace-proxy > input {
+	margin-top: 0;
+	margin-bottom: 0;
+}*/
+.politespace-proxy.active.notempty input {
+	-webkit-text-fill-color: transparent;
+	color: transparent;
+}
+.politespace-proxy.active.notempty input[type=number] {
+	-moz-appearance: textfield;
+}
+.politespace-proxy.active.notempty input[type=number]::-webkit-inner-spin-button,
+.politespace-proxy.active.notempty input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+    </style>
 </head>
 <body>
     <div id="loading_page">
@@ -443,7 +501,36 @@
         </div>
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://unpkg.com/file-upload-with-preview@4.0.2/dist/file-upload-with-preview.min.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/politespace.js"></script>
     @include('sweet::alert')
     @stack('scripts')
+    <script type="application/javascript">
+        var upload = new FileUploadWithPreview('myUniqueUploadId')
+
+        $("#sortable-container").sortable({
+            update: function(event, ui) {
+                // Get the new token order
+                let newTokenOrder = $(this).sortable('toArray', {attribute: 'data-upload-token'})
+
+                // Init new array that we'll file with the correct order
+                let sortedCachedFileArray = []
+
+                // Loop through the newTokenOrder array and add each email in place as found
+                for (let x = 0; x < newTokenOrder.length; x++) {
+                let foundIndex = upload.cachedFileArray.map(image => image.token).indexOf(newTokenOrder[x])
+                sortedCachedFileArray.push(upload.cachedFileArray[foundIndex])
+                }
+
+                // Replace the cachedFileArray with your new sortedCachedFileArray
+                upload.replaceFiles(sortedCachedFileArray)
+            }
+        });
+
+        // Check the current status of the `cachedFileArray`
+        $('#check-cachedFileArray').on('click', function() {
+            console.log(upload.cachedFileArray)
+        })
+    </script>
 </body>
 </html>

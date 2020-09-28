@@ -55,14 +55,17 @@ return [
 
     'attendance_leave' => [
 
-        // this option must be set to true if you want to release a token
-        // when your user successfully terminates the password reset procedure
-        'release_token' => env('PASSWORD_RESET_RELEASE_TOKEN', false),
-
         // here you can specify some validation rules for your password recovery procedure
         'validation_rules' => [
             'request_date' => 'required|date|after:yesterday',
             'reason' => 'required'
+        ]
+    ],
+
+    'update_user' => [
+
+        'validation_rules' => [
+
         ]
     ]
 
